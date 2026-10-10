@@ -1,0 +1,27 @@
+### Create an article
+POST http://localhost:3000/api/articles
+Content-Type: application/json
+
+{
+  "name": "Example article",
+  "description": "Created with requests.http",
+  "content": "Article body",
+  "publishAt": 1791590400000
+}
+
+### Missing name (expect 400)
+POST http://localhost:3000/api/articles
+Content-Type: application/json
+
+{
+  "description": "Article without a name",
+  "publishAt": 1791590400000
+}
+
+### Missing publishAt (expect 400)
+POST http://localhost:3000/api/articles
+Content-Type: application/json
+
+{
+  "name": "Article without a publish date"
+}
