@@ -25,3 +25,67 @@ Content-Type: application/json
 {
   "name": "Article without a publish date"
 }
+
+### Create article: Pagination basics
+POST http://localhost:3000/api/articles
+Content-Type: application/json
+
+{
+  "name": "Pagination basics",
+  "description": "An introduction to paginated results",
+  "content": "Pagination divides a long list into smaller pages.",
+  "publishAt": 1791676800000
+}
+
+### Create article: Query parameters
+POST http://localhost:3000/api/articles
+Content-Type: application/json
+
+{
+  "name": "Query parameters",
+  "description": "How clients request a specific page",
+  "content": "Limit controls the number of results, while page selects the result window.",
+  "publishAt": 1791763200000
+}
+
+### Create article: Page size
+POST http://localhost:3000/api/articles
+Content-Type: application/json
+
+{
+  "name": "Choosing a page size",
+  "description": "Keep responses a useful size",
+  "content": "A smaller limit can make each response easier to process.",
+  "publishAt": 1791849600000
+}
+
+### Create article: Result offsets
+POST http://localhost:3000/api/articles
+Content-Type: application/json
+
+{
+  "name": "Result offsets",
+  "description": "Selecting later pages of results",
+  "content": "The page number and limit determine how many results to skip.",
+  "publishAt": 1791936000000
+}
+
+### Create article: API clients
+POST http://localhost:3000/api/articles
+Content-Type: application/json
+
+{
+  "name": "API clients",
+  "description": "Working with article endpoints",
+  "content": "Clients can use pagination parameters to request just the results they need.",
+  "publishAt": 1792022400000
+}
+
+### Get first 3 articles
+GET http://localhost:3000/api/articles?limit=3&page=1
+
+### Get next 3 articles
+GET http://localhost:3000/api/articles?limit=3&page=2
+
+### Get page 2 with default limit
+GET http://localhost:3000/api/articles
