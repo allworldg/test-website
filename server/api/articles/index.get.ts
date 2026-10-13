@@ -1,7 +1,8 @@
+import { count } from 'drizzle-orm';
 import { db } from '../../db';
-import { articles } from '../../db/article';
+import { articles } from '../../db/schema/article';
 
-export default defineEventHandler((event) => {
+export default defineEventHandler(async (event) => {
   const query = getQuery(event);
   if (
     (query.limit !== undefined && typeof query.limit !== 'string') ||
@@ -26,5 +27,15 @@ export default defineEventHandler((event) => {
     });
   }
 
-  return db.select().from(articles).limit(limit).offset((page - 1) * limit);
+  const [articleRows, totalRows] = await Promise.all([
+    db.select().from(articles).limit(limit).offset((page - 1) * limit),
+    db.select({ total: count() }).from(articles),
+  ]);
+
+  return {
+    articles: articleRows,
+    limit,
+    page,
+    total: totalRows[0]?.total??0,
+  };
 });

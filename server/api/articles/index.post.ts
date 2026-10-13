@@ -1,5 +1,5 @@
 import { db } from '../../db';
-import { articles } from '../../db/article';
+import { articles } from '../../db/schema/article';
 
 export default defineEventHandler(async (event) => {
   const body = await readBody(event);

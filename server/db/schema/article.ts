@@ -5,6 +5,7 @@ export const articles = sqliteTable('articles', {
   name: text('name').notNull(),
   description: text('description'),
   content: text('content'),
+  domain: text('domain'),
   publishAt: integer('publishAt', {
     mode: 'timestamp',
   }).notNull(),
