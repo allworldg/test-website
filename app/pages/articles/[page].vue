@@ -1,20 +1,7 @@
 <script setup lang="ts">
 const page = computed(() => Number(useRoute().params.page))
-
-const { data: articleData, error } = await useFetch('/api/articles', {
-    query: {
-        page: page,
-        limit: 5,
-    }
-})
+const limit = 5
 const { data: countData, error: countError } = await useFetch('/api/articles/count')
-if (error.value) {
-    createError({
-        status: error.value.status ?? 500,
-        message: error.value.message ?? 'server is error',
-        fatal: true,
-    })
-}
 if (countError.value) {
     createError({
         status: countError.value.status ?? 400,
@@ -22,8 +9,25 @@ if (countError.value) {
         fatal: true,
     })
 }
+const totalPages = computed(() => Math.max(1, Math.ceil((countData.value?.count ?? 0) / limit)))
+if (!Number.isInteger(page.value) || page.value < 1 || page.value > totalPages.value) {
+    await navigateTo('/articles/1')
+}
+
+const { data: articleData, error } = await useFetch('/api/articles', {
+    query: {
+        page: page,
+        limit: limit,
+    }
+})
+if (error.value) {
+    createError({
+        status: error.value.status ?? 500,
+        message: error.value.message ?? 'server is error',
+        fatal: true,
+    })
+}
 const articles = articleData.value?.articles
-const totalPages = computed(() => Math.max(1, Math.ceil((countData.value?.count ?? 0) / 10)))
 </script>
 <template>
     <div class="min-h-screen bg-gray-100 ">
