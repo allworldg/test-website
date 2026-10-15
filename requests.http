@@ -53,7 +53,7 @@ POST http://localhost:3000/api/articles
 Content-Type: application/json
 
 {
-  "name": "Choosing a page size",
+  "name": "Choosing a page size,sldkfj",
   "description": "Keep responses a useful size",
   "content": "A smaller limit can make each response easier to process.",
   "publishAt": 1791849600000
@@ -64,7 +64,7 @@ POST http://localhost:3000/api/articles
 Content-Type: application/json
 
 {
-  "name": "Result offsets",
+  "name": "Result lkasdj",
   "description": "Selecting later pages of results",
   "content": "The page number and limit determine how many results to skip.",
   "publishAt": 1791936000000
