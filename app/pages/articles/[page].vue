@@ -4,17 +4,26 @@ const page = computed(() => Number(useRoute().params.page))
 const { data: articleData, error } = await useFetch('/api/articles', {
     query: {
         page: page,
-        limit: 10,
+        limit: 5,
     }
 })
+const { data: countData, error: countError } = await useFetch('/api/articles/count')
 if (error.value) {
     createError({
-        status: error.value.status ?? 400,
-        message: error.value.message ?? '请求错误',
+        status: error.value.status ?? 500,
+        message: error.value.message ?? 'server is error',
+        fatal: true,
+    })
+}
+if (countError.value) {
+    createError({
+        status: countError.value.status ?? 400,
+        message: countError.value.message ?? '请求错误',
         fatal: true,
     })
 }
 const articles = articleData.value?.articles
+const totalPages = computed(() => Math.max(1, Math.ceil((countData.value?.count ?? 0) / 10)))
 </script>
 <template>
     <div class="min-h-screen bg-gray-100 ">
@@ -22,8 +31,8 @@ const articles = articleData.value?.articles
             <nav class="flex flex-row gap-12 py-4 text-sm justify-center">
                 <NuxtLink v-if="page>1" :to="`/articles/${page - 1}`">&lt; prev</NuxtLink>
                 <span v-else aria-disabled="true" class="text-gray-400">prev</span>
-                <div>{{ page }} / 10</div>
-                <NuxtLink v-if="page<10" :to="`/articles/${page + 1}`">next &gt;</NuxtLink>
+                <div>{{ page }} / {{ totalPages }}</div>
+                <NuxtLink v-if="page < totalPages" :to="`/articles/${page + 1}`">next &gt;</NuxtLink>
                 <span v-else aria-disabled="true" class="text-gray-400">next</span>
             </nav>
             <main v-for="article in articles" :key="article.id"
@@ -46,9 +55,11 @@ const articles = articleData.value?.articles
             </main>
 
             <nav class="flex flex-row gap-12 py-4 text-sm justify-center">
-                <a>&lt; prev</a>
-                <div>{{ page }} / 10</div>
-                <a>next &gt;</a>
+                <NuxtLink v-if="page > 1" :to="`/articles/${page - 1}`">&lt; prev</NuxtLink>
+                <span v-else aria-disabled="true" class="text-gray-400">prev</span>
+                <div>{{ page }} / {{ totalPages }}</div>
+                <NuxtLink v-if="page < totalPages" :to="`/articles/${page + 1}`">next &gt;</NuxtLink>
+                <span v-else aria-disabled="true" class="text-gray-400">next</span>
             </nav>
         </div>
     </div>
