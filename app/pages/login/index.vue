@@ -4,29 +4,29 @@ const password = ref('')
 const errorMessage = ref('')
 const isLogin = useState('isLogin', () => false)
 
-async function onSubmit() {
+function onSubmit() {
     errorMessage.value = ''
 
-    try {
-        await $fetch('/api/user', {
-            method: 'POST',
-            body: {
-                username: username.value,
-                password: password.value,
-            },
-        })
-
+    $fetch('/api/user', {
+        method: 'POST',
+        body: {
+            username: username.value,
+            password: password.value,
+        },
+    })
+        .then(async () => {
         isLogin.value = true
         await navigateTo('/dashboard')
-    } catch (error) {
-        const apiError = error as {
-            data?: { statusMessage?: string }
-            statusMessage?: string
-        }
-        errorMessage.value = apiError.data?.statusMessage
-            ?? apiError.statusMessage
-            ?? '登录失败，请稍后重试'
-    }
+        })
+        .catch((error) => {
+            const apiError = error as {
+                data?: { statusMessage?: string }
+                statusMessage?: string
+            }
+            errorMessage.value = apiError.data?.statusMessage
+                ?? apiError.statusMessage
+                ?? '登录失败，请稍后重试'
+        })
 }
 
 definePageMeta({
