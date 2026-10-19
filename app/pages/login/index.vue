@@ -2,10 +2,14 @@
 const username = ref('')
 const password = ref('')
 const errorMessage = ref('')
-const isLogin = useState('isLogin', () => false)
 
 function onSubmit() {
     errorMessage.value = ''
+
+    if (!username.value || !password.value || username.value.length < 3 || password.value.length < 6) {
+        errorMessage.value = '账号和密码长度不能少于6位'
+        return
+    }
 
     $fetch('/api/user', {
         method: 'POST',
@@ -15,8 +19,7 @@ function onSubmit() {
         },
     })
         .then(async () => {
-        isLogin.value = true
-        await navigateTo('/dashboard')
+            await navigateTo('/dashboard')
         })
         .catch((error) => {
             const apiError = error as {
@@ -30,7 +33,8 @@ function onSubmit() {
 }
 
 definePageMeta({
-    layout: 'login'
+    layout: 'login',
+    middleware: 'auth',
 })
 </script>
 <template>

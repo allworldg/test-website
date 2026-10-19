@@ -1,6 +1,6 @@
 import { eq } from 'drizzle-orm';
-import { db } from '../db';
-import { users } from '../db/schema/user';
+import { db } from '../../db';
+import { users } from '../../db/schema/user';
 
 export default defineEventHandler(async (event) => {
   const body = await readBody(event);
@@ -26,6 +26,14 @@ export default defineEventHandler(async (event) => {
       statusMessage: 'username or password is wrong',
     });
   }
+
+  setCookie(event, 'access_token', body.username, {
+    httpOnly: true,
+    secure: !import.meta.dev,
+    sameSite: 'lax',
+    path: '/',
+    maxAge: 60 * 100,
+  });
 
   return { success: true };
 });
