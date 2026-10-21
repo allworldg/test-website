@@ -1,5 +1,7 @@
 <script setup lang="ts">
-    
+const props = defineProps<{
+    user: { username: string } | null
+}>()
 </script>
 <template>
     <div
@@ -17,7 +19,7 @@
             </nav>
         </div>
         <div>
-            username
+            {{ props.user?.username }}
         </div>
     </div>
 </template>

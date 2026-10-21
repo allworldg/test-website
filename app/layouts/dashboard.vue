@@ -1,17 +1,17 @@
 <script setup lang="ts">
 import NavigationBar from '~/components/dashboard/NavigationBar.vue';
 import SideBar from '~/components/dashboard/SideBar.vue';
-const {data:user,error} = useFetch('/api/user', {
-    method: 'get'
+const { data: user, error } = useFetch('/api/user', {
+    method: 'get',
+    default: () => null
 })
-if(error.value){
+if (error.value) {
     createError({
-        status:error.value.status??400,
-        statusText:error.value.statusText??'not login',
-        fatal:true,
+        status: error.value.status ?? 400,
+        statusText: error.value.statusText ?? 'not login',
+        fatal: true,
     })
 }
-
 
 </script>
 <template>
