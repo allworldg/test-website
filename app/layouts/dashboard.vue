@@ -16,9 +16,7 @@ if (error.value) {
 </script>
 <template>
     <div class="flex min-h-screen">
-        <aside class="w-10 shrink-0">
-            <SideBar></SideBar>
-        </aside>
+        <SideBar class="w-52 shrink-0 min-h-screen"></SideBar>
         <div class="flex flex-col flex-1">
             <header>
                 <NavigationBar :user="user"></NavigationBar>

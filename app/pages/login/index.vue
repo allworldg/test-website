@@ -39,7 +39,8 @@ definePageMeta({
 </script>
 <template>
     <div class="flex min-h-screen items-center justify-center bg-gray-100 p-4">
-        <form class="w-full max-w-sm rounded-lg border border-gray-200 bg-white p-6 shadow-sm" @submit.prevent="onSubmit">
+        <form class="w-full max-w-sm rounded-lg border border-gray-200 bg-white p-6 shadow-sm"
+            @submit.prevent="onSubmit">
             <h1 class="mb-6 text-xl font-semibold">登录</h1>
 
             <label for="account" class="mb-1 block text-sm">账号</label>
@@ -50,7 +51,8 @@ definePageMeta({
             <input id="password" v-model="password" type="password" placeholder="请输入密码"
                 class="mb-5 w-full rounded border border-gray-300 px-3 py-2" />
 
-            <p v-if="errorMessage" class="mb-4 text-sm text-red-600" role="alert">{{ errorMessage }}</p>
+            <p v-if="errorMessage" class="mb-4 text-sm text-red-600" role="alert">{{ errorMessage }}
+            </p>
 
             <button type="submit"
                 class="w-full rounded bg-blue-600 px-3 py-2 text-white hover:bg-blue-700">
