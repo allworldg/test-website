@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import NavigationBar from '~/components/dashboard/NavigationBar.vue';
 import SideBar from '~/components/dashboard/SideBar.vue';
+import { SIDEBAR_COLLAPSE } from '~/constants';
 const { data: user, error } = useFetch('/api/user', {
     method: 'get',
     default: () => null
@@ -12,11 +13,12 @@ if (error.value) {
         fatal: true,
     })
 }
+const collapse = useState<boolean>(SIDEBAR_COLLAPSE, () => false)
 
 </script>
 <template>
     <div class="flex min-h-screen">
-        <SideBar class="w-52 shrink-0 min-h-screen"></SideBar>
+        <SideBar class="shrink-0 min-h-screen duration-300 transition-[width]" :class="collapse ? 'w-20' : 'w-52'"></SideBar>
         <div class="flex flex-col flex-1">
             <header>
                 <NavigationBar :user="user"></NavigationBar>
