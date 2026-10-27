@@ -22,6 +22,9 @@ const collapse = useState<boolean>(SIDEBAR_COLLAPSE, () => false)
         <div class="flex flex-col flex-1">
             <header>
                 <NavigationBar :user="user"></NavigationBar>
+                <div class="flex items-center h-8 border-b border-b-gray-300 pl-2">
+                    <div class="">this is breadcrum3b</div>
+                </div>
             </header>
             <main class="flex-1">
                 <slot></slot>

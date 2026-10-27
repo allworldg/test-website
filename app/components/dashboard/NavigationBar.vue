@@ -8,7 +8,7 @@ const collapse = useState<boolean>(SIDEBAR_COLLAPSE, () => false)
 </script>
 <template>
     <div
-        class="flex justify-between h-14 border-b-gray-300 shadow-[0_2px_6px_-4px_rgba(0,0,0,0.3)] ">
+        class="flex justify-between h-14 border-b-gray-300 border-b shadow-[0_2px_6px_-4px_rgba(0,0,0,0.3)] ">
         <div class="flex flex-row gap-2 items-center">
             <button @click="collapse = !collapse"
                 class="cursor-pointer hover:bg-gray-100 self-stretch px-4">
