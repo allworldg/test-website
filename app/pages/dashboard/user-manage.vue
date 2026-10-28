@@ -37,13 +37,16 @@ definePageMeta({
             </div>
         </form>
 
-        <div class="flex gap-2 text-xs mt-6">
+        <div class="flex gap-3 text-xs mt-6">
             <button @click="() => { }"
-                class="bg-blue-100 text-blue-500 hover:bg-blue-400 border border-blue-500 rounded-sm px-4 py-1">+
+                class="bg-blue-100 text-blue-500 hover:bg-blue-400 hover:text-white border border-blue-500 rounded-sm px-4 py-1">+
                 新增</button>
-            <button @click="() => { }">修改</button>
-            <button @click="() => { }">删除</button>
-            <button @click="() => { }">导出</button>
+            <button @click="() => { }"
+                class="bg-green-100 text-green-500 hover:bg-green-400 hover:text-white border border-green-500 rounded-sm px-4 py-1"> 修改</button>
+            <button @click="() => { }"
+                class="bg-red-100 text-red-500 hover:bg-red-400 hover:text-white border border-red-500 rounded-sm px-4 py-1">- 删除</button>
+            <button @click="() => { }"
+                class="bg-yellow-100 text-yellow-500 hover:bg-yellow-400 hover:text-white border border-yellow-500 rounded-sm px-4 py-1">e 导出</button>
         </div>
 
 
