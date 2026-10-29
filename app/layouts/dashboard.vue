@@ -18,8 +18,9 @@ const collapse = useState<boolean>(SIDEBAR_COLLAPSE, () => false)
 </script>
 <template>
     <div class="flex min-h-screen">
-        <SideBar class="shrink-0 min-h-screen duration-300 transition-[width] max-lg:hidden" :class="collapse ? 'w-16' : 'w-52'"></SideBar>
-        <div class="flex flex-col flex-1">
+        <SideBar class="shrink-0 min-h-screen duration-300 transition-[width] max-lg:hidden"
+            :class="collapse ? 'w-16' : 'w-52'"></SideBar>
+        <div class="flex flex-col flex-1 min-w-0">
             <header>
                 <NavigationBar :user="user"></NavigationBar>
                 <div class="flex items-center h-8 border-b border-b-gray-300 pl-2">
